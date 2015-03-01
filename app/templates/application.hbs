@@ -1,3 +1,28 @@
-<h2 id="title">Welcome to Ember.js</h2>
-
-{{outlet}}
+<br>
+<div class="container">
+	<div class="row">
+		{{input type="search" placeholder="Search" class="center-block"}}
+	</div>
+	<br>
+	<div class="row">
+		<div class="col-md-3">
+			<ul>
+				{{#each annotations}}
+					<li><i class="fa fa-link"></i>{{text}}</li>
+				{{/each}}
+			</ul>
+		</div>
+		<div class="col-md-6">
+			{{doc-content paragraphs=doc newAnnotation="startCreatingAnnotation" annotationCreated="addAnnotation" annotationDeleted="deleteAnnotation"}}
+		</div>
+		<div class="col-md-3">
+			{{#if annotationBeingCreated}}
+				{{margin-annotation annotation=annotationBeingCreated}}
+			{{else}}
+				{{#if annotationSelected}}
+					{{margin-annotation annotation=annotationSelected}}
+				{{/if}}
+			{{/if}}
+		</div>
+	</div>
+</div>

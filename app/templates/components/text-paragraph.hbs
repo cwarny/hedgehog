@@ -1,0 +1,7 @@
+{{#each chunk in chunks}}
+	{{#if chunk.text}}
+		{{inline-highlight annotation=chunk action="deleteAnnotation"}}
+	{{else}}
+		<span>{{chunk}}</span>
+	{{/if}}
+{{/each}}

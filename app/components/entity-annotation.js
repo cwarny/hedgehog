@@ -6,8 +6,8 @@ export default Ember.Component.extend({
 		return EntityProperty.create();
 	}.property(),
 	props: function() {
-		return this.get("annotation.props").copy(true);
-	}.property(),
+		if (this.get("annotation.props")) return this.get("annotation.props").copy(true);
+	}.property("annotation"),
 	
 	didInsertElement: function() {
 		this.$("input.new-prop-key").focus();

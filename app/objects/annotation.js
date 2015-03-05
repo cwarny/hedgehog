@@ -9,5 +9,9 @@ export default Ember.Object.extend({
 	notEditing: Ember.computed.not("editing"),
 	isEntity: function() {
 		return this.get("type") === "entity-annotation";
-	}.property("type")
+	}.property("type"),
+	iconType: function() {
+		if (this.get("type") === "entity-annotation") return "tag";
+		else return "comment";
+	}.property()
 });

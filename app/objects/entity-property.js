@@ -1,6 +1,12 @@
 import Ember from "ember";
 
-export default Ember.Object.extend({
+var EntityProperty = Ember.Object.extend(Ember.Copyable, {
 	propKey: null,
-	propValue: null
+	propValue: null,
+
+	copy: function() {
+		return EntityProperty.create(this);
+	}
 });
+
+export default EntityProperty;

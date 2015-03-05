@@ -34,11 +34,10 @@ export default Ember.Controller.extend({
 			this.set("annotationBeingCreated", annotation);
 		},
 		addAnnotation: function(annotation) {
-			debugger;
 			this.set("annotationBeingCreated", null);
 			if (this.get("annotationSelected")) this.get("annotationSelected").set("selected", false);
-			annotation.set("selected", true);
 			this.get("annotations").addObject(annotation);
+			annotation.set("selected", true);
 		},
 		deleteAnnotation: function(annotation) {
 			this.set("annotationBeingCreated", null);

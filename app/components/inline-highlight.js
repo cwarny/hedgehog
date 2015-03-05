@@ -8,10 +8,10 @@ export default Ember.Component.extend(ClickElsewhereMixin, {
 
 	onClickElsewhere: function() {
 		var annotation = this.get("annotation");
-		if (annotation.get("completed")) {
+		if (annotation.get("saved")) {
+			annotation.set("editing", false);
 			if (annotation.get("selected"))	annotation.set("selected", false);
 		} else {
-			debugger;
 			this.sendAction("action", annotation);
 		}
 	},

@@ -1,0 +1,40 @@
+<div class="row">
+	<div class="col-md-12">
+		<div class="row">
+			<div class="col-md-12">
+				{{#each prop in props}}
+					<div class="row">
+						<div class="col-md-6">
+							{{input value=prop.propKey type="text" readonly=annotation.notEditing}}
+						</div>
+						<div class="col-md-6">
+							{{input value=prop.propValue type="text" class="pull-right" readonly=annotation.notEditing}}
+						</div>	
+					</div>
+				{{/each}}
+				<div class="row">
+					<form role="form" {{action "addProperty" on="submit"}}>
+						<div class="col-md-6">
+							{{input class="new-prop-key" value=newProp.propKey type="text" readonly=annotation.notEditing}}
+						</div>
+						<div class="col-md-6">
+							{{input value=newProp.propValue type="text" class="pull-right" readonly=annotation.notEditing}}
+						</div>
+						<input type="submit" style="display:none">
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-12">
+		{{#if annotation.editing}}
+			<button type="button" class="btn btn-xs btn-default" {{action "saveAnnotation" on="click" bubbles=false}}>Save</button>
+			<button type="button" class="btn btn-xs btn-default pull-right" {{action "cancelAnnotation" on="click" bubbles=false}}>Cancel</button>
+		{{else}}
+			<button type="button" class="btn btn-xs btn-default" {{action "editAnnotation" on="click" bubbles=false}}>Edit</button>
+			<button type="button" class="btn btn-xs btn-default pull-right" {{action "deleteAnnotation" on="click" bubbles=false}}>Delete</button>
+		{{/if}}
+	</div>
+</div>

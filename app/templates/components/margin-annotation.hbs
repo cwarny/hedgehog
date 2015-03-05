@@ -8,58 +8,19 @@
 </div>
 
 {{#if annotation.type}}
-	<div class="row">
-		<div class="col-md-12">
-			{{#if annotation.isComment}}
-				<div class="row">
-					<div class="col-md-12">
-						{{textarea placeholder="Say something interesting"}}
-					</div>
-				</div>
-			{{else}}
-				{{#if annotation.isEntity}}
-					<div class="row">
-						<div class="col-md-12">
-							{{#each p in annotation.entityProperties}}
-								<div class="row">
-									<div class="col-md-6">
-										{{input value=p.propKey type="text"}}
-									</div>
-									<div class="col-md-6">
-										{{input value=p.propValue type="text" class="pull-right"}}
-									</div>	
-								</div>
-							{{/each}}
-							<div class="row">
-								<form role="form" {{action "addProperty" on="submit"}}>
-									<div class="col-md-6">
-										{{input value=p.propKey type="text"}}
-									</div>
-									<div class="col-md-6">
-										{{input value=p.propValue type="text" class="pull-right"}}
-									</div>
-								</form>
-							</div>
-						</div>
-					</div>
-				{{/if}}
-			{{/if}}
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-12">
-			<button type="button" class="btn btn-xs btn-default" {{action "addAnnotation" on="click" bubbles=false}}>Save</button>
-			<button type="button" class="btn btn-xs btn-default pull-right" {{action "deleteAnnotation" on="click" bubbles=false}}>Cancel</button>
-		</div>
-	</div>
+	{{!-- {{component annotation.type annotation=annotation}} --}}
+	{{#if annotation.isEntity}}
+		{{entity-annotation annotation=annotation}}
+	{{else}}
+		{{comment-annotation annotation=annotation}}
+	{{/if}}
 {{else}}
-	{{!-- <button type="button" class="btn btn-sm btn-default" style="width:100%" {{action "createAnnotation" on="click" bubbles=false}}>Add annotation</button> --}}
 	<div class="row">
 		<div class="col-md-6">
-			<button type="button" class="btn btn-sm btn-default" style="width:100%" {{action "createAnnotation" "entity" on="click" bubbles=false}}>Add entity</button>
+			<button type="button" class="btn btn-sm btn-default" style="width:100%" {{action "createAnnotation" "entity-annotation" on="click" bubbles=false}}>Add entity</button>
 		</div>
 		<div class="col-md-6">
-			<button type="button" class="btn btn-sm btn-default" style="width:100%" {{action "createAnnotation" "comment" on="click" bubbles=false}}>Add comment</button>
+			<button type="button" class="btn btn-sm btn-default" style="width:100%" {{action "createAnnotation" "comment-annotation" on="click" bubbles=false}}>Add comment</button>
 		</div>
 	</div>
 {{/if}}

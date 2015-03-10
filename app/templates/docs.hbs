@@ -1,0 +1,7 @@
+<div class="row">
+	{{#each docs as |doc|}}
+		{{#link-to "doc" doc tagName="p" class="search-result well"}}
+			{{{doc.highlight.body.firstObject}}}
+		{{/link-to}}
+	{{/each}}
+</div>

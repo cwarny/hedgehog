@@ -7,10 +7,17 @@
 p {
 	line-height: 150%;
 	word-spacing: 4px;
-	font-family: "ff-meta-serif-web-pro";
 	font-weight: 100;
 	font-style: normal;
 	font-size: 18px;
+}
+
+p.paragraph {
+	font-family: "ff-meta-serif-web-pro";
+}
+
+p.search-result {
+	cursor: pointer;
 }
 
 input[type=search] {

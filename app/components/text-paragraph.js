@@ -3,6 +3,7 @@ import Annotation from "../objects/annotation";
 
 export default Ember.Component.extend({
 	tagName: "p",
+	classNames: [ "paragraph" ],
 
 	chunks: function() {
 		var text = this.get("text"),

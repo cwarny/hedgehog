@@ -1,0 +1,22 @@
+{{!-- <div class="row">
+	<div class="col-md-3">
+		<ul>
+			{{#each annotations}}
+				<li><i class="fa fa-{{iconType}}"></i>{{text}}</li>
+			{{/each}}
+		</ul>
+	</div>
+	<div class="col-md-6">
+		{{doc-content paragraphs=doc newAnnotation="startCreatingAnnotation" annotationCreated="addAnnotation" annotationDeleted="deleteAnnotation"}}
+	</div>
+	<div class="col-md-3">
+		{{#if annotationBeingCreated}}
+			{{margin-annotation annotation=annotationBeingCreated}}
+		{{else}}
+			{{#if annotationSelected}}
+				{{margin-annotation annotation=annotationSelected}}
+			{{/if}}
+		{{/if}}
+	</div>
+</div> --}}
+{{_source.body}}

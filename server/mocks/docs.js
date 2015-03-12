@@ -43,10 +43,12 @@ module.exports = function(app) {
 	});
 
 	docsRouter.get("/:id", function(req, res) {
-		res.send({
-			"docs": {
-				id: req.params.id
-			}
+		es.get({
+			index: "tim",
+			type: "doc",
+			id: req.params.id
+		}, function(err, resp) {
+			res.send(resp);
 		});
 	});
 

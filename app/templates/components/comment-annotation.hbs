@@ -1,11 +1,11 @@
 <div class="row">
 	<div class="col-md-12">
-		{{textarea placeholder="Say something interesting" value=comment readonly=annotation.notEditing}}
+		{{textarea placeholder="Say something interesting" value=comment readonly=annotation.isNotEditing}}
 	</div>
 </div>
 <div class="row">
 	<div class="col-md-12">
-		{{#if annotation.editing}}
+		{{#if annotation.isEditing}}
 			<button type="button" class="btn btn-xs btn-default" {{action "saveAnnotation" on="click" bubbles=false}}>Save</button>
 			<button type="button" class="btn btn-xs btn-default pull-right" {{action "cancelAnnotation" on="click" bubbles=false}}>Cancel</button>
 		{{else}}

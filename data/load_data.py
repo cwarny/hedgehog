@@ -6,7 +6,7 @@ es = Elasticsearch()
 foldername = 'tim_oreilly_activities'
 folder = os.listdir(foldername)
 
-for fn in folder:
+for i, fn in enumerate(folder):
 	with open(foldername + '/' + fn) as f:
 		doc = f.read().strip()
-		es.index('tim', 'doc', { 'body': doc })
+		es.index('tim', 'doc', { 'body': doc }, i)

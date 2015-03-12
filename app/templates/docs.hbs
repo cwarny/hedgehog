@@ -1,7 +1,18 @@
 <div class="row">
-	{{#each docs as |doc|}}
-		{{#link-to "doc" doc tagName="p" class="search-result well"}}
-			{{{doc.highlight.body.firstObject}}}
-		{{/link-to}}
-	{{/each}}
+	<div class="col-md-3">
+		<ul>
+			{{#each ann in annotations}}
+				<li><i class="fa fa-{{ann.iconType}}"></i>{{ann.text}}</li>
+			{{/each}}
+		</ul>
+	</div>
+	<div class="col-md-6">
+		{{#each doc in this}}
+			{{#link-to "doc" doc tagName="p" class="search-result well"}}
+				{{{doc.highlight}}}
+			{{/link-to}}
+		{{/each}}
+	</div>
+	<div class="col-md-3">
+	</div>
 </div>

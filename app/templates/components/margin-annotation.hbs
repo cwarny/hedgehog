@@ -8,19 +8,20 @@
 </div>
 
 {{#if annotation.type}}
-	{{!-- {{component annotation.type annotation=annotation}} --}}
 	{{#if annotation.isEntity}}
-		{{entity-annotation annotation=annotation}}
+		{{entity-annotation annotation=annotation action="deleteAnnotation"}}
 	{{else}}
-		{{comment-annotation annotation=annotation}}
+		{{#if annotation.isComment}}
+			{{comment-annotation annotation=annotation action="deleteAnnotation"}}
+		{{/if}}
 	{{/if}}
 {{else}}
 	<div class="row">
 		<div class="col-md-6">
-			<button type="button" class="btn btn-sm btn-default" style="width:100%" {{action "createAnnotation" "entity-annotation" on="click" bubbles=false}}>Add entity</button>
+			<button type="button" class="btn btn-sm btn-default" style="width:100%" {{action "createAnnotation" "entity" on="click" bubbles=false}}>Add entity</button>
 		</div>
 		<div class="col-md-6">
-			<button type="button" class="btn btn-sm btn-default" style="width:100%" {{action "createAnnotation" "comment-annotation" on="click" bubbles=false}}>Add comment</button>
+			<button type="button" class="btn btn-sm btn-default" style="width:100%" {{action "createAnnotation" "comment" on="click" bubbles=false}}>Add comment</button>
 		</div>
 	</div>
 {{/if}}

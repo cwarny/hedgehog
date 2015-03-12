@@ -32,6 +32,22 @@
 					"index": "analyzed", 
 					"index_analyzer": "autocomplete",
 					"search_analyzer": "standard"
+				},
+				"annotations": {
+					"properties": {
+						"name": { 
+							"type": "string", 
+							"index": "not_analyzed" 
+						},
+						"start": { 
+							"type": "integer", 
+							"index": "not_analyzed" 
+						},
+						"end": { 
+							"type": "integer", 
+							"index":"not_analyzed" 
+						}
+					}
 				}
 			}
 		}

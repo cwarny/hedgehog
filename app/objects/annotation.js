@@ -1,17 +1,20 @@
 import Ember from "ember";
 
 export default Ember.Object.extend({
-	selected: false,
-	started: false,
-	saved: false,
+	isSelected: false,
+	isStarted: false,
+	isSaved: false,
 	type: null,
-	editing: true,
-	notEditing: Ember.computed.not("editing"),
+	isEditing: true,
+	isNotEditing: Ember.computed.not("isEditing"),
 	isEntity: function() {
-		return this.get("type") === "entity-annotation";
+		return this.get("type") === "entity";
+	}.property("type"),
+	isComment: function() {
+		return this.get("type") === "comment";
 	}.property("type"),
 	iconType: function() {
-		if (this.get("type") === "entity-annotation") return "tag";
+		if (this.get("type") === "entity") return "tag";
 		else return "comment";
 	}.property()
 });

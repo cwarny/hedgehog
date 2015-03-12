@@ -1,13 +1,13 @@
 {{!-- <div class="row">
 	<div class="col-md-3">
 		<ul>
-			{{#each annotations}}
-				<li><i class="fa fa-{{iconType}}"></i>{{text}}</li>
+			{{#each ann in annotations}}
+				<li><i class="fa fa-{{ann.iconType}}"></i>{{ann.text}}</li>
 			{{/each}}
 		</ul>
 	</div>
 	<div class="col-md-6">
-		{{doc-content paragraphs=doc newAnnotation="startCreatingAnnotation" annotationCreated="addAnnotation" annotationDeleted="deleteAnnotation"}}
+		{{doc-content paragraphs=paragraphs newAnnotation="startCreatingAnnotation" annotationCreated="addAnnotation" annotationDeleted="deleteAnnotation"}}
 	</div>
 	<div class="col-md-3">
 		{{#if annotationBeingCreated}}
@@ -19,4 +19,18 @@
 		{{/if}}
 	</div>
 </div> --}}
-{{_source.body}}
+<div class="row">
+	<div class="col-md-3">
+		<ul>
+			{{#each ann in annotationsSaved}}
+				<li><i class="fa fa-{{ann.iconType}}"></i>{{ann.name}}</li>
+			{{/each}}
+		</ul>
+	</div>
+	<div class="col-md-6 doc-content">{{#each chunk in chunks}}{{#if chunk.text}}{{#inline-annotation elementId=chunk.ann_id annotation=chunk action="deleteAnnotation"}}{{{chunk.text}}}{{/inline-annotation}}{{else}}{{{chunk}}}{{/if}}{{/each}}</div>
+	<div class="col-md-3">
+		{{#if annotationSelected}}
+			{{marginn-annotation annotation=annotationSelected action="deleteAnnotation"}}
+		{{/if}}
+	</div>
+</div>

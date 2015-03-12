@@ -4,16 +4,16 @@
 	font-style:normal;font-weight:500;
 }
 
-p {
-	line-height: 150%;
-	word-spacing: 4px;
+body {
 	font-weight: 100;
 	font-style: normal;
-	font-size: 18px;
 }
 
-p.paragraph {
+.doc-content {
 	font-family: "ff-meta-serif-web-pro";
+	font-size: 18px;
+	line-height: 150%;
+	word-spacing: 4px;
 }
 
 p.search-result {

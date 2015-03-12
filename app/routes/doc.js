@@ -6,7 +6,6 @@ export default Ember.Route.extend({
 	},
 
 	serialize: function(model) {
-		// this will make the URL `/posts/foo-post`
 		return { doc__id: model._id };
 	}
 });

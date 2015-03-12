@@ -2,6 +2,8 @@ import Ember from "ember";
 import EntityProperty from "../objects/entity-property";
 
 export default Ember.Component.extend({
+	classNames: ["row"],
+	
 	newProp: function() {
 		return EntityProperty.create();
 	}.property(),
@@ -16,33 +18,25 @@ export default Ember.Component.extend({
 	actions: {
 		saveAnnotation: function() {
 			var e = this.get("annotation");
-			e.toggleProperty("editing");
+			e.toggleProperty("isEditing");
 			e.set("props", this.get("props").copy(true));
-			e.set("saved", true);
-			e.get("p").sendAction("annotationCreated", e);
+			e.set("isSaved", true);
 		},
 		deleteAnnotation: function() {
-			var e = this.get("annotation");
-			e.get("p.annotations").removeObject(e);
-			e.get("p").sendAction("annotationDeleted", e);
-			e.destroy();
-			this.set("annotation", null);
+			this.sendAction("action", this.get("annotation"));
 		},
 		cancelAnnotation: function() {
 			var e = this.get("annotation");
-			if (e.get("editing") && e.get("saved")) {
-				e.toggleProperty("editing");
-				e.set("saved", true);
+			if (e.get("isEditing") && e.get("isSaved")) {
+				e.toggleProperty("isEditing");
+				e.set("isSaved", true);
 				this.set("props", e.get("props").copy(true));
 			} else {
-				e.get("p.annotations").removeObject(e);
-				e.get("p").sendAction("annotationDeleted", e);
-				e.destroy();
-				this.set("annotation", null);
+				this.sendAction("action", e);
 			}
 		},
 		editAnnotation: function() {
-			this.toggleProperty("annotation.editing");
+			this.toggleProperty("annotation.isEditing");
 			this.$("input.new-prop-key").focus();
 		},
 		addProperty: function() {

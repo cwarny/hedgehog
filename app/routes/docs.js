@@ -13,6 +13,6 @@ export default Ember.Route.extend({
 		controller.set("took", model.docs.took);
 		controller.set("max_score", model.docs.hits.max_score);
 		controller.set("total", model.docs.hits.total);
-		controller.set("docs", model.docs.hits.hits);
+		controller.set("model", model.docs.hits.hits);
 	}
 });

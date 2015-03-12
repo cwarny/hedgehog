@@ -6,33 +6,25 @@ export default Ember.Component.extend({
 	actions: {
 		saveAnnotation: function() {
 			var c = this.get("annotation");
-			c.toggleProperty("editing");
+			c.toggleProperty("isEditing");
 			c.set("comment", this.get("comment"));
-			c.set("saved", true);
-			c.get("p").sendAction("annotationCreated", c);
+			c.set("isSaved", true);
 		},
 		deleteAnnotation: function() {
-			var c = this.get("annotation");
-			c.get("p.annotations").removeObject(c);
-			c.get("p").sendAction("annotationDeleted", c);
-			c.destroy();
-			this.set("annotation", null);
+			this.sendAction("action", this.get("annotation"));
 		},
 		cancelAnnotation: function() {
 			var c = this.get("annotation");
-			if (c.get("editing")) {
-				c.toggleProperty("editing");
-				c.set("saved", true);
+			if (c.get("isEditing") && c.get("isSaved")) {
+				c.toggleProperty("isEditing");
+				c.set("isSaved", true);
 				this.set("comment", c.get("comment"));
 			} else {
-				c.get("p.annotations").removeObject(c);
-				c.get("p").sendAction("annotationDeleted", c);
-				c.destroy();
-				this.set("annotation", null);
+				this.sendAction("action", c);
 			}
 		},
 		editAnnotation: function() {
-			this.toggleProperty("annotation.editing");
+			this.toggleProperty("annotation.isEditing");
 		}
 	}
 });

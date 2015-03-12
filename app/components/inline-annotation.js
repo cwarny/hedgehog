@@ -4,19 +4,19 @@ import ClickElsewhereMixin from "../mixins/click-elsewhere";
 export default Ember.Component.extend(ClickElsewhereMixin, {
 	tagName: "span",
 	classNames: ["annotated"],
-	classNameBindings: ["annotation.selected:selected"],
+	classNameBindings: ["annotation.isSelected:selected"],
 
 	onClickElsewhere: function() {
 		var annotation = this.get("annotation");
-		if (annotation.get("saved")) {
-			annotation.set("editing", false);
-			if (annotation.get("selected"))	annotation.set("selected", false);
+		if (annotation.get("isSaved")) {
+			annotation.set("isEditing", false);
+			if (annotation.get("isSelected")) annotation.set("isSelected", false);
 		} else {
 			this.sendAction("action", annotation);
 		}
 	},
-	
+
 	click: function(evt) {
-		this.toggleProperty("annotation.selected");
+		this.toggleProperty("annotation.isSelected");
 	}
 });

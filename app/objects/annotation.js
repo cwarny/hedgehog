@@ -15,6 +15,6 @@ export default Ember.Object.extend({
 	}.property("type"),
 	iconType: function() {
 		if (this.get("type") === "entity") return "tag";
-		else return "comment";
+		else if (this.get("type") === "comment") return "comment";
 	}.property()
 });

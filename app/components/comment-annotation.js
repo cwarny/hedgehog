@@ -3,6 +3,10 @@ import Ember from "ember";
 export default Ember.Component.extend({
 	comment: Ember.computed.oneWay("annotation.comment"),
 
+	didInsertElement: function() {
+		this.$("textarea").focus();
+	},
+
 	actions: {
 		saveAnnotation: function() {
 			var c = this.get("annotation");

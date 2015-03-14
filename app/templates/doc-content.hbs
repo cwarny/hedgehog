@@ -1,0 +1,1 @@
+{{#each chunk in chunks}}{{#if chunk.text}}{{#inline-annotation elementId=chunk.ann_id annotation=chunk action="deleteAnnotation"}}{{{chunk.text}}}{{/inline-annotation}}{{else}}{{{chunk}}}{{/if}}{{/each}}

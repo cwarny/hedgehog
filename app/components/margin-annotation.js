@@ -6,7 +6,7 @@ export default Ember.Component.extend({
 	classNames: "annotation col-md-12".w(),
 	attributeBindings: ["style"],
 
-	click: function(evt) {
+	mouseDown: function(evt) {
 		evt.stopPropagation();
 	},
 

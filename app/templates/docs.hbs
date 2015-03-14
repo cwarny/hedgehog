@@ -7,11 +7,13 @@
 		</ul>
 	</div>
 	<div class="col-md-6">
-		{{#each doc in this}}
-			{{#link-to "doc" doc tagName="p" class="search-result well"}}
-				{{{doc.highlight}}}
-			{{/link-to}}
-		{{/each}}
+		{{#if q}}
+			{{#each doc in this}}
+				{{#link-to "doc" doc tagName="p" class="search-result well"}}
+					{{{doc.highlight}}}
+				{{/link-to}}
+			{{/each}}
+		{{/if}}
 	</div>
 	<div class="col-md-3">
 	</div>

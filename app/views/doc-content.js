@@ -2,12 +2,14 @@ import Ember from "ember";
 import Annotation from "../objects/annotation";
 
 export default Ember.View.extend({
+	classNames: "col-md-6 doc-content".w(),
+	templateName: "doc-content",
 
 	mouseUp: function() {
 		var selection = document.getSelection();
 		var highlight = selection.toString();
 		if (!highlight) return;
-		var offset = this.getCharacterOffsetWithin(this.$(".doc-content")[0]);
+		var offset = this.getCharacterOffsetWithin(this.$()[0]);
 		var nl = this.getNumberOfPreviousNewlines(selection.anchorNode.previousElementSibling);
 		var range = {};
 		range.start = offset + nl;

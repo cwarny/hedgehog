@@ -19,11 +19,11 @@ export default Ember.Mixin.create({
   
 	didInsertElement: function() {
 		this._super.apply(this, arguments);
-		return $(window).on("click", this.get("clickHandler"));
+		return $(window).on("mousedown", this.get("clickHandler"));
 	},
 	
 	willDestroyElement: function() {
-		$(window).off("click", this.get("clickHandler"));
+		$(window).off("mousedown", this.get("clickHandler"));
 		return this._super.apply(this, arguments);
 	}
 });

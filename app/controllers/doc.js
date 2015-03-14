@@ -3,11 +3,17 @@ import Ember from "ember";
 /* global _ */
 
 export default Ember.Controller.extend({
-	needs: ["docs"],
+	needs: ["application"],
+
+	q: Ember.computed.alias("controllers.application.q"),
+
+	goBackToSearch: function() {
+		this.transitionToRoute("docs");
+	}.observes("q"),
 
 	body: Ember.computed.alias("model._source.body"),
 	highlight: Ember.computed.alias("model.highlight.body.firstObject"),
-	doc_id: Ember.computed.alias("model._id"),
+	id: Ember.computed.alias("model._id"),
 
 	chunks: function() {
 		var body = this.get("body"),
@@ -29,18 +35,25 @@ export default Ember.Controller.extend({
 		return Ember.A([]);
 	}.property(),
 
-	annotationsSaved: function() {
-		return this.get("annotations").filterBy("isSaved");
+	entitiesSaved: function() {
+		return this.get("annotations").filterBy("isEntity").filterBy("isSaved");
 	}.property("annotations.@each.isSaved"),
 
 	annotationSelected: function() {
 		return this.get("annotations").findBy("isSelected");
 	}.property("annotations.@each.isSelected"),
 
+	selectedUsers: function() {
+		return Ember.A([]);
+	}.property(),
+
 	actions: {
 		deleteAnnotation: function(annotation) {
 			this.get("annotations").removeObject(annotation);
 			annotation.destroy();
+		},
+		addUser: function(annotation) {
+			this.get("selectedUsers").pushObject(annotation);
 		}
 	}
 });

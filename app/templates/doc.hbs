@@ -1,36 +1,24 @@
-{{!-- <div class="row">
-	<div class="col-md-3">
-		<ul>
-			{{#each ann in annotations}}
-				<li><i class="fa fa-{{ann.iconType}}"></i>{{ann.text}}</li>
-			{{/each}}
-		</ul>
-	</div>
-	<div class="col-md-6">
-		{{doc-content paragraphs=paragraphs newAnnotation="startCreatingAnnotation" annotationCreated="addAnnotation" annotationDeleted="deleteAnnotation"}}
-	</div>
-	<div class="col-md-3">
-		{{#if annotationBeingCreated}}
-			{{margin-annotation annotation=annotationBeingCreated}}
-		{{else}}
-			{{#if annotationSelected}}
-				{{margin-annotation annotation=annotationSelected}}
-			{{/if}}
-		{{/if}}
-	</div>
-</div> --}}
 <div class="row">
 	<div class="col-md-3">
 		<ul>
-			{{#each ann in annotationsSaved}}
-				<li><i class="fa fa-{{ann.iconType}}"></i>{{ann.name}}</li>
+			{{#each e in entitiesSaved}}
+				{{#dragdroppable-item entity=e}}
+					<li><span class="entity">{{e.name}}</span></li>
+				{{/dragdroppable-item}}
 			{{/each}}
 		</ul>
+		<svg width="200px" height="300px">
+			{{#each e in entitiesSaved}}
+				<foreignObject width="200px" height="300px">
+					<body xmlns="http://www.w3.org/1999/xhtml"><span class="entity">{{e.name}}</span></body>
+				</foreignObject>
+			{{/each}}
+		</svg>
 	</div>
-	<div class="col-md-6 doc-content">{{#each chunk in chunks}}{{#if chunk.text}}{{#inline-annotation elementId=chunk.ann_id annotation=chunk action="deleteAnnotation"}}{{{chunk.text}}}{{/inline-annotation}}{{else}}{{{chunk}}}{{/if}}{{/each}}</div>
+	{{view "doc-content"}}
 	<div class="col-md-3">
 		{{#if annotationSelected}}
-			{{marginn-annotation annotation=annotationSelected action="deleteAnnotation"}}
+			{{margin-annotation annotation=annotationSelected action="deleteAnnotation"}}
 		{{/if}}
 	</div>
 </div>

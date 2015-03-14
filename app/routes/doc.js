@@ -2,10 +2,10 @@ import Ember from "ember";
 
 export default Ember.Route.extend({
 	model: function(params) {
-		return Ember.$.getJSON("/api/docs/" + params.doc__id);
+		return Ember.$.getJSON("/api/docs/" + params.doc_id);
 	},
 
 	serialize: function(model) {
-		return { doc__id: model._id };
+		return { doc_id: model._id };
 	}
 });

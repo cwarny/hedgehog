@@ -18,7 +18,6 @@ export default Ember.View.extend({
 		var annotationSelected = this.get("annotationSelected");
 		if (annotationSelected) annotationSelected.set("isSelected", false);
 		var annotation = Annotation.create({
-			name: highlight,
 			text: highlight,
 			start: range.start,
 			end: range.end,

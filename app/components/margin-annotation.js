@@ -1,6 +1,8 @@
 import Ember from "ember";
 import CommentMixin from "../mixins/comment";
 import EntityMixin from "../mixins/entity";
+import Relationship from "../objects/relationship";
+import Annotation from "../objects/annotation";
 
 export default Ember.Component.extend({
 	classNames: "annotation col-md-12".w(),
@@ -23,8 +25,15 @@ export default Ember.Component.extend({
 		createAnnotation: function(type) {
 			var annotation = this.get("annotation");
 			annotation.set("type", type);
-			if (type === "entity") annotation.reopen(EntityMixin);
-			else if (type === "comment") annotation.reopen(CommentMixin);
+			if (type === "entity") {
+				annotation.reopen(EntityMixin);
+				annotation.get("relationships").addObject(Relationship.create({
+					predicate: "name",
+					object: annotation.get("text")
+				}));
+			} else if (type === "comment") {
+				annotation.reopen(CommentMixin);
+			}
 		},
 		deleteAnnotation: function(annotation) {
 			this.sendAction("action", annotation);

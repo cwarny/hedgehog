@@ -2,18 +2,21 @@
 	<div class="col-md-3">
 		<ul>
 			{{#each e in entitiesSaved}}
-				{{#dragdroppable-item entity=e}}
-					<li><span class="entity">{{e.name}}</span></li>
-				{{/dragdroppable-item}}
+				<li>
+					{{#dragdroppable-item entity=e dropped="addRelationship"}}
+						<span class="entity">{{e.relationships.firstObject.object}}</span>
+					{{/dragdroppable-item}}
+					<ul>
+						{{#each r in e.objectRelationships}}
+							<li class="relationship-object">
+								<span class="relationship-predicate">{{r.predicate}}</span>
+								<span class="entity">{{r.object.relationships.firstObject.object}}</span>
+							</li>
+						{{/each}}
+					</ul>
+				</li>
 			{{/each}}
 		</ul>
-		<svg width="200px" height="300px">
-			{{#each e in entitiesSaved}}
-				<foreignObject width="200px" height="300px">
-					<body xmlns="http://www.w3.org/1999/xhtml"><span class="entity">{{e.name}}</span></body>
-				</foreignObject>
-			{{/each}}
-		</svg>
 	</div>
 	{{view "doc-content"}}
 	<div class="col-md-3">

@@ -55,6 +55,15 @@ li {
 	padding: 5px;
 }
 
+li.relationship-object {
+	margin-top: 5px;
+	padding-left: 15px;
+}
+
+span.relationship-predicate {
+	padding-right: 5px;
+}
+
 i {
 	padding-right: 5px;
 }

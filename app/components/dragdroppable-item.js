@@ -27,8 +27,8 @@ export default Ember.Component.extend({
 	},
  
 	drop: function(event) {
-		var data = event.dataTransfer.getData("text/data");
-		this.sendAction("dropped", data);
-		this.set("dragClass", "deactivated");    
+		var oid = event.dataTransfer.getData("text/data");
+		this.sendAction("dropped", this.get("entity.ann_id"), oid);
+		this.set("dragClass", "deactivated");
 	}
 });

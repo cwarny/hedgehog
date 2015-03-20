@@ -1,6 +1,6 @@
 import Ember from "ember";
 
-export default Ember.Object.extend({
+var Annotation = Ember.Object.extend(Ember.Copyable, {
 	isSelected: false,
 	isStarted: false,
 	isSaved: false,
@@ -16,5 +16,11 @@ export default Ember.Object.extend({
 	iconType: function() {
 		if (this.get("type") === "entity") return "tag";
 		else if (this.get("type") === "comment") return "comment";
-	}.property()
+	}.property(),
+	copy: function() {
+		var a = Annotation.extend(this);
+		return a.create();
+	}
 });
+
+export default Annotation;

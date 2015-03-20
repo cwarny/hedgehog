@@ -1,4 +1,5 @@
 import Ember from "ember";
+import Relationship from "../objects/relationship";
 
 /* global _ */
 
@@ -43,17 +44,18 @@ export default Ember.Controller.extend({
 		return this.get("annotations").findBy("isSelected");
 	}.property("annotations.@each.isSelected"),
 
-	selectedUsers: function() {
-		return Ember.A([]);
-	}.property(),
-
 	actions: {
 		deleteAnnotation: function(annotation) {
 			this.get("annotations").removeObject(annotation);
 			annotation.destroy();
 		},
-		addUser: function(annotation) {
-			this.get("selectedUsers").pushObject(annotation);
+		addRelationship: function(sid, oid) {
+			var subj = this.get("entitiesSaved").findBy("ann_id", sid),
+				obj = this.get("entitiesSaved").findBy("ann_id", oid);
+			subj.get("relationships").addObject(Relationship.create({
+				predicate: "wow",
+				object: obj
+			}));
 		}
 	}
 });

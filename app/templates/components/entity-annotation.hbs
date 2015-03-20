@@ -1,21 +1,29 @@
 <div class="col-md-12">
-	{{#each prop in props}}
+	{{#each rel in relationships}}
 		<div class="row">
 			<div class="col-md-6">
-				{{input value=prop.propKey type="text" readonly=annotation.isNotEditing}}
+				{{input value=rel.predicate type="text" readonly=annotation.isNotEditing}}
 			</div>
 			<div class="col-md-6">
-				{{input value=prop.propValue type="text" class="pull-right" readonly=annotation.isNotEditing}}
+				{{#if rel.object.relationships}}
+					{{input value=rel.object.relationships.firstObject.object type="text" class="pull-right" readonly=annotation.isNotEditing}}
+				{{else}}
+					{{input value=rel.object type="text" class="pull-right" readonly=annotation.isNotEditing}}
+				{{/if}}
 			</div>	
 		</div>
 	{{/each}}
 	<div class="row">
-		<form role="form" {{action "addProperty" on="submit"}}>
+		<form role="form" {{action "addRelationship" on="submit"}}>
 			<div class="col-md-6">
-				{{input class="new-prop-key" value=newProp.propKey type="text" readonly=annotation.isNotEditing}}
+				{{input class="rel" value=newRel.predicate type="text" readonly=annotation.isNotEditing}}
 			</div>
 			<div class="col-md-6">
-				{{input value=newProp.propValue type="text" class="pull-right" readonly=annotation.isNotEditing}}
+				{{#if newRel.object.name}}
+					{{input value=newRel.object.name type="text" class="pull-right" readonly=annotation.isNotEditing}}
+				{{else}}
+					{{input value=newRel.object type="text" class="pull-right" readonly=annotation.isNotEditing}}
+				{{/if}}
 			</div>
 			<input type="submit" style="display:none">
 		</form>

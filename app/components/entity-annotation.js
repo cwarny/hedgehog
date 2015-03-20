@@ -1,25 +1,28 @@
 import Ember from "ember";
-import EntityProperty from "../objects/entity-property";
+import Relationship from "../objects/relationship";
 
 export default Ember.Component.extend({
 	classNames: ["row"],
 	
-	newProp: function() {
-		return EntityProperty.create();
+	newRel: function() {
+		return Ember.Object.create({ predicate: null, object: null });
 	}.property(),
-	props: function() {
-		if (this.get("annotation.props")) return this.get("annotation.props").copy(true);
-	}.property("annotation"),
+	relationships: function() {
+		var e = this.get("annotation");
+		if (e) return e.get("relationships").copy(true);
+		else return Ember.A([]);
+	}.property("annotation.relationships"),
 	
 	didInsertElement: function() {
-		this.$("input.new-prop-key").focus();
+		this.$("input.rel").focus();
 	},
 
 	actions: {
 		saveAnnotation: function() {
 			var e = this.get("annotation");
 			e.toggleProperty("isEditing");
-			e.set("props", this.get("props").copy(true));
+			var entity = e.get("entity");
+			e.set("relationships", this.get("relationships").copy(true));
 			e.set("isSaved", true);
 		},
 		deleteAnnotation: function() {
@@ -30,20 +33,24 @@ export default Ember.Component.extend({
 			if (e.get("isEditing") && e.get("isSaved")) {
 				e.toggleProperty("isEditing");
 				e.set("isSaved", true);
-				this.set("props", e.get("props").copy(true));
+				this.set("relationships", e.get("relationships").copy(true));
 			} else {
 				this.sendAction("action", e);
 			}
 		},
 		editAnnotation: function() {
 			this.toggleProperty("annotation.isEditing");
-			this.$("input.new-prop-key").focus();
+			this.$("input.rel").focus();
 		},
-		addProperty: function() {
-			this.get("props").addObject(this.get("newProp"));
-			this.set("newProp", EntityProperty.create());
+		addRelationship: function() {
+			var newRel = this.get("newRel");
+			this.get("relationships").addObject(Relationship.create({
+				predicate: newRel.get("predicate"),
+				object: newRel.get("object")
+			}));
+			this.set("newRel", Relationship.create());
 			Ember.run.schedule("afterRender", this, function() {
-				this.$("input.new-prop-key").focus();
+				this.$("input.rel").focus();
 			});
 		}
 	}

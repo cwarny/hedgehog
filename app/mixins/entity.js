@@ -1,7 +1,12 @@
 import Ember from "ember";
 
 export default Ember.Mixin.create({
-	props: function() {
+	relationships: function() {
 		return Ember.A([]);
-	}.property()
+	}.property(),
+	objectRelationships: function() {
+		return this.get("relationships").filter(function(rel) {
+			return Ember.typeOf(rel.get("object")) === "instance";
+		});
+	}.property("relationships.@each")
 });

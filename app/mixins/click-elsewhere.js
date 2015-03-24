@@ -13,7 +13,7 @@ export default Ember.Mixin.create({
 		$target = $(e.target);
 		thisIsElement = $target.closest(element).length === 1;
 		if (!thisIsElement) {
-			return this.onClickElsewhere(event);
+			return this.onClickElsewhere(e);
 		}
 	},
   

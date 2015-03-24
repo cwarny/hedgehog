@@ -9,7 +9,7 @@
 					<ul>
 						{{#each r in e.objectRelationships}}
 							<li class="relationship-object">
-								<span class="relationship-predicate">{{r.predicate}}</span>
+								{{predicate-relationship value=r.predicate}}
 								<span class="entity">{{r.object.relationships.firstObject.object}}</span>
 							</li>
 						{{/each}}

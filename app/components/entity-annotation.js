@@ -11,7 +11,7 @@ export default Ember.Component.extend({
 		var e = this.get("annotation");
 		if (e) return e.get("relationships").copy(true);
 		else return Ember.A([]);
-	}.property("annotation.relationships"),
+	}.property("annotation.relationships.@each", "annotation.relationships.@each.predicate"),
 	
 	didInsertElement: function() {
 		this.$("input.rel").focus();

@@ -60,8 +60,11 @@ li.relationship-object {
 	padding-left: 15px;
 }
 
-span.relationship-predicate {
+.relationship-predicate {
 	padding-right: 5px;
+	outline: none;
+	min-width: 20px;
+	display: inline-block;
 }
 
 i {

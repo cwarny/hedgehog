@@ -38,7 +38,7 @@ export default Ember.Controller.extend({
 
 	entitiesSaved: function() {
 		return this.get("annotations").filterBy("isEntity").filterBy("isSaved");
-	}.property("annotations.@each.isSaved"),
+	}.property("annotations.@each", "annotations.@each.isSaved", "annotations.@each.name"),
 
 	annotationSelected: function() {
 		return this.get("annotations").findBy("isSelected");
@@ -47,13 +47,23 @@ export default Ember.Controller.extend({
 	actions: {
 		deleteAnnotation: function(annotation) {
 			this.get("annotations").removeObject(annotation);
+			this.get("entitiesSaved").forEach(function(a) { 
+				var rels = a.get("relationships");
+				if (rels) {
+					rels.forEach(function(rel) {
+						if (rel.get("object") === annotation) {
+							rels.removeObject(rel);
+						}
+					});
+				}
+			});
 			annotation.destroy();
 		},
 		addRelationship: function(sid, oid) {
 			var subj = this.get("entitiesSaved").findBy("ann_id", sid),
 				obj = this.get("entitiesSaved").findBy("ann_id", oid);
 			subj.get("relationships").addObject(Relationship.create({
-				predicate: "wow",
+				predicate: null,
 				object: obj
 			}));
 		}
